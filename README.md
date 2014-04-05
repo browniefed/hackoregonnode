@@ -8,4 +8,4 @@ Node-postgres: https://github.com/brianc/node-postgres/wiki
 
 
     
-    https://www.codeship.io/projects/1eb7d0c0-9f32-0131-a848-62f068d43b47/status
+    ![codeship](https://www.codeship.io/projects/1eb7d0c0-9f32-0131-a848-62f068d43b47/status)
