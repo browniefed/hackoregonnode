@@ -43,8 +43,8 @@ server.get('/transactions', function(req, res, next) {
 
 server.get('/transactions/cash_contributions/:year', function(req, res, next) {
 	
-	req.params = year
-	var query = client.query('select committee_name, sum(amount) as s from raw_committees inner join raw_committee_transactions on committee_id=filer_id where sub_type=\'Cash Contribution\' and extract(year from tran_date)=' + year + '2012 group by committee_name order by s desc;')
+	var year = req.params.year;
+	var query = client.query('select committee_name, sum(amount) as s from raw_committees inner join raw_committee_transactions on committee_id=filer_id where sub_type=\'Cash Contribution\' and extract(year from tran_date)=$1::string group by committee_name order by s desc;', [year,]);
 	
 	query.on('row', function(row, result) {
 		result.addRow(row);
