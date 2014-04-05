@@ -19,6 +19,9 @@ server.listen(process.env.PORT || 8080, function() {
 	//server is listineing
 });
 
+server.get('/', function(req, res, next) {
+	res.send('This is the api end point for hackoregon. Checkout https://github.com/hackoregon/hackoregonnode and submit pulling requests if you want an endpoint');
+})
 
 server.get('/transactions', function(req, res, next) {
 	var query = client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;');
