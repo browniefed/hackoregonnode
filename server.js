@@ -23,6 +23,10 @@ server.listen(process.env.PORT || 8080, function() {
 server.get('/test', function(req, res, next) {
 	var query = client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;');
 
+	query.on('row', function(row, result) {
+		result.addRow(row);
+	});
+
 	query.on('end', function(data) {
 		res.contentType = 'json';
 		res.send(data.rows);
