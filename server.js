@@ -5,7 +5,7 @@ var restify = require('restify'),
 		database: 'hackoregon',
 		password: process.env.RDS_PASS,
 		post: '5432',
-		host: 'hackoregon.cr7ctfkctdpv.us-west-2.rds.amazonaws.com'
+		host: 'hackoregon.c1srwyzwwu1a.us-west-2.rds.amazonaws.com'
 	},
 	server = restify.createServer(),
 	client = new pg.Client(connection);
@@ -20,7 +20,7 @@ server.listen(process.env.PORT || 8080, function() {
 });
 
 
-server.get('/test', function(req, res, next) {
+server.get('/transactions', function(req, res, next) {
 	var query = client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;');
 
 	query.on('row', function(row, result) {
