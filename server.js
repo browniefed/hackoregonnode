@@ -60,10 +60,6 @@ server.get('/transactions/cash_contributions/:year', function(req, res, next) {
 		res.send(error);
 	})
 	
-server.get('/url_pattern_here', function(req, res, next) {
-
-  // testing query object from the request -BB
-  res.send('year: ' + req.query.year);
-
-	})
 })
+
+
