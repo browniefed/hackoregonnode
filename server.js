@@ -23,13 +23,13 @@ server.listen(process.env.PORT || 8080, function() {
 server.get('/test', function(req, res, next) {
 	var query = client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;');
 
-	query.on('row', function(err, data) {
-		if (err) {
-			res.status('404');
-			res.send('DB ERROR');
-			return;
-		}
+	query.on('row', function(data) {
 		res.contentType = 'json';
 		res.send(data)
 	});
+
+	query.on('error', function(error) {
+		res.status(404);
+		res.send(error);
+	})
 })
