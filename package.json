@@ -1,0 +1,15 @@
+{
+  "name": "hackoregonnode",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^2.7.0",
+    "pg": "^2.11.1"
+  }
+}
