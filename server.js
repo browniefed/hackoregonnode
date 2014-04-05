@@ -13,19 +13,14 @@ pg.connect(conString, function(err, client, done) {
   if(err) {
     return console.error('error fetching client from pool', err);
   }
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
+
 	server.get('/test', function(req, res, next) {
 		client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;', function(err, result) {
 			//call `done()` to release the client back to the pool
 			done();
 			if(err) {
-			return console.error('error running query', err);
+			res.status(404);
+			return;
 			}
 			res.contentType = 'json';
 			res.send(result);
