@@ -37,3 +37,22 @@ server.get('/transactions', function(req, res, next) {
 		res.send(error);
 	})
 })
+
+server.get('/cash_contributions', function(req, res, next) {
+	
+	var query = client.query('select committee_name, sum(amount) as s from raw_committees inner join raw_committee_transactions on committee_id=filer_id where sub_type=\'Cash Contribution\' and extract(year from tran_date)=2012 group by committee_name order by s desc;')
+	
+	query.on('row', function(row, result) {
+		result.addRow(row);
+	});
+	
+	query.on('end', function(data) {
+		res.contentType = 'json';
+		res.send(data.rows);
+	});
+
+	query.on('error', function(error) {
+		res.status(404);
+		res.send(error);
+	})
+})
