@@ -31,5 +31,5 @@ committees(server, client);
 transactions(server, client);
 
 server.get('/', function(req, res, next) {
-	res.send('This is the api end point for hackoregon. Checkout https://github.com/hackoregon/hackoregonnode and submit pulling requests if you want an endpoint');
+	res.send('This is the api end point for hackoregon. Checkout https://github.com/hackoregon/hackoregonnode and submit pulling requests if you want an endpoint.');
 })
