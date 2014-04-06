@@ -24,23 +24,23 @@ server.listen(process.env.PORT || 8080, function() {
 });
 
 //ERROR HANDLER
-var onErr = function(error) {
+var onErr = function(res, error) {
 		res.status(404);
 		res.send(error);
 };
-var onRow = function(row, result) {
+var onRow = function(res, row, result) {
 	result.addRow(row);
 };
 
-var onEnd = function(data) {
+var onEnd = function(res, data) {
 	res.contentType = 'json';
 	res.send(data.rows);
 }
 
-var respond = function(query) {
-	query.on('row', onRow);
-	query.on('error', onErr);
-	query.on('end', onEnd);
+var respond = function(query, res) {
+	query.on('row', onRow.bind(null, res));
+	query.on('error', onErr.bind(null, res));
+	query.on('end', onEnd.bind(null, res));
 }
 
 
@@ -50,14 +50,14 @@ server.get('/', function(req, res, next) {
 
 server.get('/transactions', function(req, res, next) {
 	var query = client.query('select sub_type, sum(amount) from raw_committee_transactions group by sub_type order by sum(amount) desc;');
-	respond(query);
+	respond(query, res);
 });
 
 server.get('/transactions/cash_contributions/:year', function(req, res, next) {
 	
 	var year = req.params.year;
 	var query = client.query('select committee_name, sum(amount) as s from raw_committees inner join raw_committee_transactions on committee_id=filer_id where sub_type=\'Cash Contribution\' and extract(year from tran_date)=$1 group by committee_name order by s desc;', [year]);
-	respond(query);
+	respond(query, res);
 });
 
 server.get('/committees', function(req, res, next) {
@@ -65,13 +65,13 @@ server.get('/committees', function(req, res, next) {
 		limit = req.query.limit || 100,
 		start = page * limit;
 		query = client.query('SELECT * FROM raw_comittees LIMIT $1::int OFFSET $2::int', limit, start);
-	respond(query);
+	respond(query, res);
 });
 
 server.get('/commitee/:id', function(req, res, next) {
 	var id = req.params.id,
 		query = client.query('SELECT * FROM raw_commitees WHERE comittee_id = $1::int', id);
-	respond(query);
+	respond(query, res);
 });
 server.get('/committees/:id/transactions', function(req, res, next) {
 	var page = req.query.page || 0,
@@ -80,7 +80,7 @@ server.get('/committees/:id/transactions', function(req, res, next) {
 		id = req.params.id,
 		query = client.query('SELECT * from raw_committees inner join raw_committee_transactions on committee_id=filer_id WHERE committee_id = $1::int LIMIT $2::int OFFSET $3::int', id, limit, start);
 
-	respond(query);
+	respond(query, res);
 });
 
 
