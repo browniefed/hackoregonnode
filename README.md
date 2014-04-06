@@ -13,6 +13,6 @@ Node-postgres: https://github.com/brianc/node-postgres/wiki
 
 *Documentation coming soon*
 
-/committees ?[page = 0, limit = 100]
-/committee/:id
-/committee/:id/transactions ? [page = 0, limit = 100]
+/committees ?[page = 0, limit = 100]    
+/committee/:id     
+/committee/:id/transactions ? [page = 0, limit = 100]    
