@@ -64,7 +64,7 @@ server.get('/committees', function(req, res, next) {
 	var page = req.query.page || 0,
 		limit = req.query.limit || 100,
 		start = page * limit;
-		query = client.query('SELECT * FROM raw_comittees LIMIT $1 OFFSET $2', limit, start);
+		query = client.query('SELECT * FROM raw_committees LIMIT $1 OFFSET $2', limit, start);
 	respond(query, res);
 });
 
