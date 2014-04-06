@@ -14,4 +14,4 @@ Node-postgres: https://github.com/brianc/node-postgres/wiki
 /committee/:id     
 /committee/:id/transactions ? [page = 0, limit = 100]    
 
-Auto deployments from Drone.IO
+[![Build Status](https://drone.io/github.com/hackoregon/hackoregonnode/status.png)](https://drone.io/github.com/hackoregon/hackoregonnode/latest)
