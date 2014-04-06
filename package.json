@@ -11,5 +11,8 @@
   "dependencies": {
     "restify": "^2.7.0",
     "pg": "^2.11.1"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
