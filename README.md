@@ -13,3 +13,5 @@ Node-postgres: https://github.com/brianc/node-postgres/wiki
 /committees ?[page = 0, limit = 100]    
 /committee/:id     
 /committee/:id/transactions ? [page = 0, limit = 100]    
+
+Auto deployments from Drone.IO
