@@ -13,6 +13,7 @@ Node-postgres: https://github.com/brianc/node-postgres/wiki
 
 *Documentation coming soon*
 
+/transactions/cash_contributions/:year    
 /committees ?[page = 0, limit = 100]    
 /committee/:id     
 /committee/:id/transactions ? [page = 0, limit = 100]    
