@@ -73,7 +73,7 @@ server.get('/commitee/:id', function(req, res, next) {
 		query = client.query('SELECT * FROM raw_commitees WHERE comittee_id = $1', [id]);
 	respond(query, res);
 });
-server.get('/committees/:id/transactions', function(req, res, next) {
+server.get('/committee/:id/transactions', function(req, res, next) {
 	var page = req.query.page || 0,
 		limit = req.query.limit || 100,
 		start = page * limit,
